@@ -12,6 +12,15 @@ public interface TickRepository extends CrudRepository<Tick, Long> {
 
     List<Tick> findByInstrument(String instrument);
 
-    List<Tick> findAllByCreatedDateBetween(Date startDate, Date endDate);
+    List<Tick> findAllByCreatedDateGreaterThanEqualAndCreatedDateLessThanEqual(Date startDate, Date endDate);
 
+    default List<Tick> getAllInstrumentsByLastMin(final Date startDate,final Date endDate) {
+        return findAllByCreatedDateGreaterThanEqualAndCreatedDateLessThanEqual(startDate, endDate);
+    }
+
+    List<Tick> findAllByInstrumentAndCreatedDateGreaterThanEqualAndCreatedDateLessThanEqual(String instrument, Date startDate, Date endDate);
+
+    default List<Tick> getInstrumentByLastMin(final String instrument,final Date startDate,final Date endDate) {
+        return findAllByInstrumentAndCreatedDateGreaterThanEqualAndCreatedDateLessThanEqual(instrument, startDate, endDate);
+    }
 }

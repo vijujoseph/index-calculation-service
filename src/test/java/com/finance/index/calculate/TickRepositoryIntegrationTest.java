@@ -2,6 +2,7 @@ package com.finance.index.calculate;
 
 import com.finance.index.calculate.domain.Tick;
 import com.finance.index.calculate.repository.TickRepository;
+import com.finance.index.calculate.util.IndexCalcUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,8 +50,26 @@ public class TickRepositoryIntegrationTest {
         startDate.setTime(endDate.getTime() - 60000);
 
         // when
-        List<Tick> found = tickRepository.findAllByCreatedDateBetween(startDate,endDate);
+        List<Tick> found = tickRepository.findAllByCreatedDateGreaterThanEqualAndCreatedDateLessThanEqual(startDate,endDate);
         // then
         Assert.assertEquals(found.size(), 2);
     }
+
+    @Test
+    public void whenFindByLastSixtySecondTicksValidData1Test() {
+        Date currentDate = new Date(1569022735477L);
+
+        Tick tick = new Tick("IBM.N",143.82,1478192204000L, currentDate,"ADMIN");
+        Tick tick1 = new Tick("IBM.N",16.78,1478192304000L, new Date(),"ADMIN");
+        Tick tick2 = new Tick("IBM.M",222,1478191304000L, new Date(),"ADMIN");
+        tickRepository.save(tick);
+        tickRepository.save(tick1);
+        tickRepository.save(tick2);
+        // when
+        List<Tick> found = tickRepository.findAllByCreatedDateGreaterThanEqualAndCreatedDateLessThanEqual
+                (IndexCalcUtil.getOneMinPastTimestampOfGivenDate(currentDate),currentDate);
+        // then
+        Assert.assertEquals(found.size(), 1);
+    }
+
 }

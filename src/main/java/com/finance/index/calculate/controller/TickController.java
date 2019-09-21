@@ -3,7 +3,7 @@ package com.finance.index.calculate.controller;
 import com.finance.index.calculate.domain.Tick;
 import com.finance.index.calculate.exception.IndexCalculationException;
 import com.finance.index.calculate.service.TickService;
-import com.finance.index.calculate.util.ApplicationConstants;
+import com.finance.index.calculate.util.IndexCalcConstants;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +24,7 @@ public class TickController {
     @RequestMapping(value = "/ticks", method = RequestMethod.POST)
     public ResponseEntity saveTicks(@RequestBody Tick tick) throws IndexCalculationException {
         String status = tickService.saveTick(tick);
-        return new ResponseEntity(StringUtils.equals(status, ApplicationConstants.CREATED)
+        return new ResponseEntity(StringUtils.equals(status, IndexCalcConstants.CREATED)
                 ? HttpStatus.CREATED : HttpStatus.NO_CONTENT);
     }
 
