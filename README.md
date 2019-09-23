@@ -1,4 +1,4 @@
-# Getting Started
+# Getting Started - Index Calculation Service
 
 ### Requirement
 Company ABC, as one of the leading providers of financial indexes, consumes and uses real-time trading prices
