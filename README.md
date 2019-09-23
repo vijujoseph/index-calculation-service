@@ -23,7 +23,7 @@ $ gradle bootRun
 ```
 
 ## Build and Execute using Intellij
-###Pre-requisite:
+### Pre-requisite:
 
 JDK 1.8 To check, run java -version:
 ```
@@ -32,7 +32,7 @@ JDK 1.8 To check, run java -version:
 ``` 
 Any IDE, preferably Intellij
 
-###Installation and Setup:
+### Installation and Setup:
 
 -   Go to the github url - https://github.com/vijujoseph/index-calculation-service.git
 -   select 'Clone or download', copy the URL
@@ -43,7 +43,7 @@ Any IDE, preferably Intellij
 -   Run bootRun
 
 
-##Guidance - Api Specification:
+## Guidance - Api Specification:
 ```
 http://localhost:8080/ticks    
 Request type - POST
