@@ -11,6 +11,24 @@ There will be three APIs:
 -   The second one returns the statistics based on the ticks of all instruments of the last 60 seconds
 -   The third one returns the statistics based on the ticks of one instrument of the last 60 seconds.
 
+## Assumptions
+-   If the tick timestamp is 60 seconds older, the instrument will not be added and 
+return the status code 204
+-   In one post tick request, request body will contain only single tick object.
+We do not support addition of list of ticks in single request
+
+## Solution
+-   I have provided solution of the API's using in-memory H2 DB
+-   I have also provided the solution for an in-memory solution without DB
+-   This is the endpoint with aggregated statistics for all ticks across all instruments, this endpoint has to
+  execute in constant time and memory (O(1)). I have achieved this using ConcurrentHashMao
+
+## What would you improve if you had more time
+-   A complete test suit to do e2e testing
+-   100% test coverage
+-   Code review and refactoring. I will be doing the above steps when I get some more time
+
+
 ## Build and Execute
 ```
 $ gradle install
