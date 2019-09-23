@@ -14,8 +14,8 @@ import java.util.stream.DoubleStream;
 
 public final class IndexCalcUtil {
 
-
-    public static final Map<Long, Statistic> statisticsMap = new ConcurrentHashMap<>();
+    public static final Map<String, String> instrumentMap = new ConcurrentHashMap<>();
+    public static final Map<String, Statistic> statisticsMap = new ConcurrentHashMap<>();
     public static Statistic latest = new Statistic();
 
     /*
