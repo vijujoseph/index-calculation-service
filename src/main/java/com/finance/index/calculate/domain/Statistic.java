@@ -5,15 +5,17 @@ public class Statistic {
     private double avg;
     private double max;
     private double min;
+    private double sum;
     private long count;
 
     public Statistic() {
     }
 
-    public Statistic(double avg, double max, double min, long count) {
+    public Statistic(double avg, double max, double min, double sum, long count) {
         this.avg = avg;
         this.max = max;
         this.min = min;
+        this.sum = sum;
         this.count = count;
     }
 
@@ -41,6 +43,14 @@ public class Statistic {
         this.min = min;
     }
 
+    public double getSum() {
+        return sum;
+    }
+
+    public void setSum(double sum) {
+        this.sum = sum;
+    }
+
     public long getCount() {
         return count;
     }
@@ -54,12 +64,13 @@ public class Statistic {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Statistic that = (Statistic) o;
+        Statistic statistic = (Statistic) o;
 
-        if (Double.compare(that.avg, avg) != 0) return false;
-        if (Double.compare(that.max, max) != 0) return false;
-        if (Double.compare(that.min, min) != 0) return false;
-        return Double.compare(that.count, count) == 0;
+        if (Double.compare(statistic.avg, avg) != 0) return false;
+        if (Double.compare(statistic.max, max) != 0) return false;
+        if (Double.compare(statistic.min, min) != 0) return false;
+        if (Double.compare(statistic.sum, sum) != 0) return false;
+        return count == statistic.count;
     }
 
     @Override
@@ -72,17 +83,19 @@ public class Statistic {
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(min);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(count);
+        temp = Double.doubleToLongBits(sum);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (int) (count ^ (count >>> 32));
         return result;
     }
 
     @Override
     public String toString() {
-        return "TickStatisticsResponse{" +
+        return "Statistic{" +
                 "avg=" + avg +
                 ", max=" + max +
                 ", min=" + min +
+                ", sum=" + sum +
                 ", count=" + count +
                 '}';
     }

@@ -87,11 +87,9 @@ public class Tick implements Serializable {
         Tick tick = (Tick) o;
 
         if (Double.compare(tick.price, price) != 0) return false;
-        if (timestamp != tick.timestamp) return false;
         if (tickId != null ? !tickId.equals(tick.tickId) : tick.tickId != null) return false;
         if (instrument != null ? !instrument.equals(tick.instrument) : tick.instrument != null) return false;
-        if (createdDate != null ? !createdDate.equals(tick.createdDate) : tick.createdDate != null) return false;
-        return createdUser != null ? createdUser.equals(tick.createdUser) : tick.createdUser == null;
+        return timestamp != null ? timestamp.equals(tick.timestamp) : tick.timestamp == null;
     }
 
     @Override
@@ -102,9 +100,7 @@ public class Tick implements Serializable {
         result = 31 * result + (instrument != null ? instrument.hashCode() : 0);
         temp = Double.doubleToLongBits(price);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (int) (timestamp ^ (timestamp >>> 32));
-        result = 31 * result + (createdDate != null ? createdDate.hashCode() : 0);
-        result = 31 * result + (createdUser != null ? createdUser.hashCode() : 0);
+        result = 31 * result + (timestamp != null ? timestamp.hashCode() : 0);
         return result;
     }
 

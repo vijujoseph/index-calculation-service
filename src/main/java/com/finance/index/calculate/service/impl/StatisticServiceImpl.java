@@ -14,20 +14,29 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.DoubleSummaryStatistics;
 import java.util.List;
+import java.util.concurrent.locks.ReentrantLock;
 
 @Service
 public class StatisticServiceImpl implements StatisticService {
 
     private static final Logger log = LoggerFactory.getLogger(StatisticServiceImpl.class);
+    private ReentrantLock lock = new ReentrantLock();
 
     @Autowired
     TickRepository tickRepository;
 
     @Override
     public Statistic getAllTickStatsInLastOneMin(Date currentDate) throws IndexCalculationException {
-        List<Tick> tickList = tickRepository.getAllInstrumentsByLastMin
+/*        List<Tick> tickList = tickRepository.getAllInstrumentsByLastMin
                 (IndexCalcUtil.getOneMinPastTimestampOfGivenDate(currentDate), currentDate);
-        return findTickStatisticsSummary(tickList);
+        return findTickStatisticsSummary(tickList);*/
+
+        lock.lock();
+        try {
+            return getLatestStatistics(IndexCalcUtil.latest);
+        } finally {
+            lock.unlock();
+        }
     }
 
     @Override
@@ -58,6 +67,16 @@ public class StatisticServiceImpl implements StatisticService {
         response.setMin(IndexCalcUtil.twoDigitPrecisionConversion(tickStats.getMin()));
         response.setCount(tickStats.getCount());
         return response;
+    }
+
+    /**
+     * clones a Statistics object
+     *
+     * @param statistics object to clone
+     * @return a new Statistics object
+     */
+    public static Statistic getLatestStatistics(Statistic statistics) {
+        return statistics;
     }
 
 }

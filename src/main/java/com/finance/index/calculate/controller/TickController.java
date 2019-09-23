@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+
 @RestController
 public class TickController {
 
@@ -23,7 +25,13 @@ public class TickController {
      */
     @RequestMapping(value = "/ticks", method = RequestMethod.POST)
     public ResponseEntity saveTicks(@RequestBody Tick tick) throws IndexCalculationException {
+
+        if (tick == null || tick.getPrice() < 0.0) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+
         String status = tickService.saveTick(tick);
+
         return new ResponseEntity(StringUtils.equals(status, IndexCalcConstants.CREATED)
                 ? HttpStatus.CREATED : HttpStatus.NO_CONTENT);
     }
