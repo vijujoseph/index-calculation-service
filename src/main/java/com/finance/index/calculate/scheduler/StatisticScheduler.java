@@ -24,10 +24,10 @@ public class StatisticScheduler {
     private ReentrantLock lock = new ReentrantLock();
 
     /**
-     * The periodic job to remove old transaction records
+     * Scheduler to clean up ticks older than 60 seconds
      *
      */
-    @Scheduled(cron = "* * * * * ?")
+    @Scheduled(cron = "${stats.remove.cron}")
     private void removeOldRecords() {
         long currentTimestamp = Instant.now(Clock.systemUTC()).getEpochSecond();
 
