@@ -11,14 +11,14 @@ There will be three APIs:
 ## Assumptions
 -   If the tick timestamp is 60 seconds older, the instrument will not be added and 
 return the status code 204
--   In one post tick request, request body will contain only single tick object.
-We do not support addition of list of ticks in single request
+-   POST /ticks request will be handling single tick object per request. We do not support 
+passing list of ticks in a single request
 
 ## Solution
--   I have provided solution of the API's using in-memory H2 DB
--   I have also provided the solution for an in-memory solution without DB
+-   I have provided solution of the API's using **in-memory H2 DB**
+-   I have also provided the solution for an **in-memory solution without DB**
 -   This is the endpoint with aggregated statistics for all ticks across all instruments, this endpoint has to
-  execute in constant time and memory (O(1)). I have achieved this using ConcurrentHashMao
+  execute in constant time and memory (O(1)). I have achieved this using ConcurrentHashMap
 
 ## What would you improve if you had more time
 -   A complete test suit to do e2e testing
