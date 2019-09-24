@@ -27,9 +27,9 @@ for the moment
 -   Code review and refactoring. I will be doing the above steps when I get some more time
 
 ## whether you liked the challenge or not?
--   I have started executing the project thinking of easy execution. However, as 
+-   Initially I thought the task was lot more simple. However, as 
 I read the use case multiple times I realized the complexity and challenges.
-This could have been easily achievable using DB solution. But I had tough time impleneting
+This could have been easily achievable using DB solution. But I had tough time implementing
 using in-memory without DB.
 
 ## Build and Execute
