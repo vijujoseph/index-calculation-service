@@ -3,9 +3,6 @@
 ### Requirement
 Company ABC, as one of the leading providers of financial indexes, consumes and uses real-time trading prices
 of tens of thousands of financial instruments from more than 100 exchanges over the world.
-In order to ensure integrity of our index calculation and proper input data, our operations team needs a
-restful API to monitor the incoming prices. The main use case for that API is to provide real-time price
-statistic from the last 60 seconds.
 There will be three APIs:
 -   one of them is called every time we receive a tick. It is also the sole input of this rest API.
 -   The second one returns the statistics based on the ticks of all instruments of the last 60 seconds
