@@ -15,7 +15,8 @@ return the status code 204
 passing list of ticks in a single request
 
 ## Solution
--   I have provided solution of the API's using **in-memory H2 DB**
+-   I have provided solution of the API's using **in-memory H2 DB**, which has been commented out
+for the moment
 -   I have also provided the solution for an **in-memory solution without DB**
 -   This is the endpoint with aggregated statistics for all ticks across all instruments, this endpoint has to
   execute in constant time and memory (O(1)). I have achieved this using ConcurrentHashMap
